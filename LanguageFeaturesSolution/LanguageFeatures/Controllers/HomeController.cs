@@ -8,17 +8,12 @@ namespace LanguageFeatures.Controllers
     {
         public IActionResult Index()
         {
-            List<string> results = new List<string>();
-
-            foreach (Product product in Product.GetProducts())
+            Dictionary<string, Product> products = new Dictionary<string, Product>
             {
-                string name = product?.Name ?? "<No Name>";
-                decimal? price = product?.Price ?? 0;
-                string related = product?.Related?.Name ?? "<None>";
-                string category = product?.Category ?? "<No Category>";
-                results.Add(string.Format($"Name: {name}, Price: {price}, Related: {related}, Category: {category}"));
-            }
-            return View(results);
+                { "macbook-pro-2020", new Product {Name = "Macbook Pro 2020", Price = 3000M} },
+                { "ipad-pro-12", new Product {Name = "iPad Pro 12", Price = 1000M} },
+            };
+            return View(products.Keys);
         }
     }
 }
