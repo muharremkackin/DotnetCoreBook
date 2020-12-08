@@ -12,7 +12,9 @@ namespace LanguageFeatures.Controllers
             IEnumerable<Product> products = Product.GetProducts();
             decimal cartTotal = cart.TotalPrices();
             decimal ProductsTotal = products.TotalPrices();
-            return View(new string[] { $"Total: {cartTotal:C2}", $"Total: {cartTotal:C2}", });
+            decimal Filtered = products.FilterByPrice(200).TotalPrices();
+            decimal FilteredByName = products.FilterByName("iP").TotalPrices();
+            return View(new string[] { $"Total: {cartTotal:C2}", $"Total: {cartTotal:C2}", $"Filtered by price: {Filtered:C2}", $"Filtered by name price: {FilteredByName:C2}" });
         }
     }
 }

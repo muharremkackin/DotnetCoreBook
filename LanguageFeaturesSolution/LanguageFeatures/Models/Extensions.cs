@@ -13,5 +13,27 @@ namespace LanguageFeatures.Models
             }
             return total;
         }
+
+        public static IEnumerable<Product> FilterByPrice(this IEnumerable<Product> products, decimal minPrice)
+        {
+            foreach (Product product in products)
+            {
+                if ((product?.Price ?? 0) >= minPrice)
+                {
+                    yield return product;
+                }
+            }
+        }
+
+        public static IEnumerable<Product> FilterByName(this IEnumerable<Product> products, string query)
+        {
+            foreach (Product product in products)
+            {
+                if (product?.Name?.Contains(query) == true)
+                {
+                    yield return product;
+                }
+            }
+        }
     }
 }
