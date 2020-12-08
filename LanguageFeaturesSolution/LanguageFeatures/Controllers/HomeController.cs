@@ -8,12 +8,16 @@ namespace LanguageFeatures.Controllers
     {
         public IActionResult Index()
         {
-            Dictionary<string, Product> products = new Dictionary<string, Product>
+            object[] data = new object[] { 275M, 29.95M, "apple", "orange", 100, 10 };
+            decimal total = 0;
+            for (int i = 0; i < data.Length; i++)
             {
-                { "macbook-pro-2020", new Product {Name = "Macbook Pro 2020", Price = 3000M} },
-                { "ipad-pro-12", new Product {Name = "iPad Pro 12", Price = 1000M} },
-            };
-            return View(products.Keys);
+                if (data[i] is decimal d)
+                {
+                    total += d;
+                }
+            }
+            return View(new string[] { $"Total: {total:C2}" });
         }
     }
 }
