@@ -12,9 +12,15 @@ namespace LanguageFeatures.Controllers
             decimal total = 0;
             for (int i = 0; i < data.Length; i++)
             {
-                if (data[i] is decimal d)
+                switch (data[i])
                 {
-                    total += d;
+                    case decimal d:
+                        total += d;
+                        break;
+                    case int intValue when intValue > 50:
+                        total += intValue;
+                        break;
+
                 }
             }
             return View(new string[] { $"Total: {total:C2}" });
