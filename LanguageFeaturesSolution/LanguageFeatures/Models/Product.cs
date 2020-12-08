@@ -6,6 +6,7 @@ namespace LanguageFeatures.Models
     {
         public string Name { get; set; }
         public decimal? Price { get; set; }
+        public Product Related { get; set; }
 
         public static List<Product> GetProducts()
         {
@@ -18,6 +19,10 @@ namespace LanguageFeatures.Models
                 null,
                 null
             };
+
+            products[0].Related = products[1];
+            products[1].Related = products[2];
+            products[2].Related = products[3];
 
             return products;
         }
