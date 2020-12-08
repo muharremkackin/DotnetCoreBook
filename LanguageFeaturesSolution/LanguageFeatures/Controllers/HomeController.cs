@@ -20,15 +20,21 @@ namespace LanguageFeatures.Controllers
 
         public IActionResult Index()
         {
-            Cart cart = new Cart { Products = Product.GetProducts() };
-            IEnumerable<Product> products = Product.GetProducts();
-            decimal cartTotal = cart.TotalPrices();
-            decimal ProductsTotal = products.TotalPrices();
-            decimal Filtered = products.FilterByPrice(200).TotalPrices();
-            decimal FilteredByName = products.FilterByName("iP").TotalPrices();
-            decimal priceFilterTotal = products.Filter(product => FilterByPrice(product, 200)).TotalPrices();
-            decimal nameFilterTotal = products.Filter(product => FilterByName(product, "iP")).TotalPrices();
-            return View(Product.GetProducts().Select(product => product?.Name ?? "<No Name>"));
+            var names = new[] { "LOTR", "Matrix", "Golden Compass", "Interstellar", "Cloud Atlas" };
+            var products = new[] {
+                new { Name = "Kayak", Price = 275M },
+                new { Name = "Lifejacket", Price = 48.95M },
+                new { Name = "Soccer ball", Price = 19.50M },
+                new { Name = "Corner flag", Price = 34.95M }
+            };
+
+            List<string> results = new List<string>();
+            foreach (var product in products)
+            {
+                results.Add($"Name: {product.Name}, Price: {product.Price}");
+            }
+
+            return View(results);
         }
     }
 }
