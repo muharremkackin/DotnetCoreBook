@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using LanguageFeatures.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,14 +28,7 @@ namespace LanguageFeatures.Controllers
             decimal FilteredByName = products.FilterByName("iP").TotalPrices();
             decimal priceFilterTotal = products.Filter(product => FilterByPrice(product, 200)).TotalPrices();
             decimal nameFilterTotal = products.Filter(product => FilterByName(product, "iP")).TotalPrices();
-            return View(new string[] {
-                $"Total: {cartTotal:C2}",
-                $"Total: {cartTotal:C2}",
-                $"Filtered by price: {Filtered:C2}",
-                $"Filtered by price: {priceFilterTotal:C2}",
-                $"Filtered by name: {FilteredByName:C2}",
-                $"Filtered by name: {nameFilterTotal:C2}",
-                });
+            return View(Product.GetProducts().Select(product => product?.Name ?? "<No Name>"));
         }
     }
 }
