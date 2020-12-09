@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using LanguageFeatures.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +31,22 @@ namespace LanguageFeatures.Controllers
 
 
             return View(cart.Names);
+        }
+
+        public async Task<IActionResult> Length()
+        {
+            long? length = await AsyncExtensions.GetPageLength();
+            return View("Index", new string[] { $"Length: {length}" });
+        }
+
+        public async Task<IActionResult> Lengths()
+        {
+            List<string> output = new List<string>();
+            await foreach (long? length in AsyncExtensions.GetPageLengths(output, "apress.com", "microsoft.com", "amazon.com"))
+            {
+                output.Add($"Page length: {length}");
+            }
+            return View("Index", output);
         }
     }
 }
