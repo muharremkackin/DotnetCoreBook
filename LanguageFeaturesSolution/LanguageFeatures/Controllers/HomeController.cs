@@ -29,7 +29,7 @@ namespace LanguageFeatures.Controllers
             );
 
 
-            return View(cart.Products.Select(product => product.Name));
+            return View(cart.Names);
         }
     }
 }
