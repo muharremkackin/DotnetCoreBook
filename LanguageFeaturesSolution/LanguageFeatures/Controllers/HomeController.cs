@@ -30,7 +30,7 @@ namespace LanguageFeatures.Controllers
             );
 
 
-            return View(cart.Names);
+            return View(cart.Products.Select(product => $"{nameof(product.Name)}: {product.Name}, {nameof(product.Price)}: {product.Price}"));
         }
 
         public async Task<IActionResult> Length()
