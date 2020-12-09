@@ -20,21 +20,16 @@ namespace LanguageFeatures.Controllers
 
         public IActionResult Index()
         {
-            var names = new[] { "LOTR", "Matrix", "Golden Compass", "Interstellar", "Cloud Atlas" };
-            var products = new[] {
-                new { Name = "Kayak", Price = 275M },
-                new { Name = "Lifejacket", Price = 48.95M },
-                new { Name = "Soccer ball", Price = 19.50M },
-                new { Name = "Corner flag", Price = 34.95M }
-            };
 
-            List<string> results = new List<string>();
-            foreach (var product in products)
-            {
-                results.Add($"Name: {product.Name}, Price: {product.Price}");
-            }
+            IProductSelection cart = new Cart(
+                new Product { Name = "Kayak", Price = 275M },
+                new Product { Name = "Lifejacket", Price = 48.95M },
+                new Product { Name = "Soccer ball", Price = 19.50M },
+                new Product { Name = "Corner flag", Price = 34.95M }
+            );
 
-            return View(results);
+
+            return View(cart.Products.Select(product => product.Name));
         }
     }
 }
